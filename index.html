@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {box-sizing: border-box;margin:0;padding:0;}
+    html{color:#000;background:#fff;height: 100%;}
+    body{height: 100%;font-size: 14px;overflow-x: hidden;font-family: "Helvetica Neue",Helvetica,"Lantinghei SC","Microsoft YaHei",Arial,sans-serif;}
+    body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+    table{border-collapse:collapse;border-spacing:0;}
+    fieldset,img,button{border:0;}
+    img {
+      vertical-align: top;
+    }
+    input{background:none;}
+    button,input,textarea,select{outline: none;}
+    address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:normal;}
+    ol,ul{list-style:none}
+    caption,th{text-align:left}
+    h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+    q:before,q:after{content:''}
+    abbr,acronym{border:0;font-variant:normal;}
+    sup{vertical-align:text-top;}
+    sub{vertical-align:text-bottom;}
+    input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;resize:none;}
+    legend{color:#000}
+    .hidden{display:none;}
+    a{text-decoration: none;}
+    .clearfix{zoom:1;}.clearfix:after{content:'';display:block;visibility:hidden;clear:both;height:0px;}
+  </style>
+  <style>
+    html,body {
+      height: 100%;
+    }
+    body {
+      background-color: #F3F3F3;
+    }
+    .container {
+      height: 100%;
+      max-width: 750px;
+      margin: 0 auto;
+      background-color: #F3F3F3;
+      padding: 15px;
+    }
+    .basic-info-wrapper {
+      background-color: #fff;
+      padding: 25px 16px;
+      border-radius: 4px;
+      border: 1px solid #eee;
+    }
+    .basic-info {
+      padding: 5px 0px;
+    }
+    .basic-info-tit {
+      color: #999;
+      display: inline-block;
+      min-width: 70px;
+    }
+    .basic-info-tit.block {
+      display: block;
+    }
+    .basic-info-tip {
+      font-weight: 600;
+      padding-right: 6px;
+    }
+    .basic-info-op {
+      color: #4A90E2;
+      cursor: pointer;
+    }
+    .content-wrapper{
+        margin: 35px 0px 15px;
+        text-align: center;
+    }
+    .content-wrapper-line:before{
+        content: '';
+        display: block;
+        height: 1px;
+        width: 100%;
+        background-color: #ccc;
+        position: relative;
+        top: 10px;
+        left: 0;
+    }
+    .content-text{
+        display: inline-block;
+        background: #F3F3F3;
+        padding: 0 10px;
+        position: relative;
+        font-weight: 500;
+        font-size: 16px;
+    }
+    .btn-wrapper {
+      margin-top: 62px;
+    }
+    .btn-wrapper .btn {
+      width: 100%;
+      color: #fff;
+      background-color: #4682C8;
+      text-align: center;
+      padding: 12px 0px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn-wrapper .btn.disabled {
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="basic-info-wrapper">
+      <p class="basic-info">
+        <span class="basic-info-tit">账户名：</span>
+        <span class="basic-info-tip" data-name="account_name">xxx</span>
+        <span class="basic-info-op" data-name="account_name">复制</span>
+      </p>
+      <p class="basic-info">
+        <span class="basic-info-tit">收款银行：</span>
+        <span class="basic-info-tip" data-name="bank_name">xxx</span>
+        <span class="basic-info-op" data-name="bank_name">复制</span>
+      </p>
+      <p class="basic-info">
+        <span class="basic-info-tit">收款账号：</span>
+        <span class="basic-info-tip" data-name="account_id">xxx</span>
+        <span class="basic-info-op" data-name="account_id">复制</span>
+      </p>
+      <p class="basic-info">
+        <span class="basic-info-tit block">备注（转账时必须填写）：</span>
+        <span class="basic-info-tip" data-name="account_remark">xxx</span>
+        <span class="basic-info-op" data-name="account_remark">复制</span>
+      </p>
+      <p class="basic-info">
+        <span class="basic-info-tit block">转账金额（转账金额保留一个工作日）：</span>
+        <span class="basic-info-tip" data-name="amount">xxx</span>
+        <span class="basic-info-op"></span>
+      </p>
+    </div>
+    <div class="content-wrapper">
+        <div class="content-wrapper-line">
+            <span class="content-text">注意事项</span>
+        </div>
+    </div>
+    <p> 1.转账时未填写备注、备注填写错误、转账金额错误等情况，都会导致充值失败；</p>
+    <p> 2.请在当天完成转账；</p>
+    <p> 3.请使用所选择的银行卡进行转账，否则转账失败。</p>
+    <div class="btn-wrapper">
+      <button class="btn disabled" id="transfer_btn">已完成转账</button>
+    </div>
+  </div>
+
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      var disabled = true;
+      var api = {
+        transferInfo: {
+          app: '/api/app/v3/payment/transfer',
+          web: '/api/v3/payment/transfer'
+        },
+        deposit: {
+          app: '/api/app/v3/payment/deposit?token=',
+          web: '/api/v3/payment/deposit?token='
+        }
+      };
+      var source = getUrlParam('source') === 'app' ? 'app' : 'web';
+      $.get(api.transferInfo[source], {
+        amount: getUrlParam('amount'),
+        platform: getUrlParam('platform'),
+        mt4_id: getUrlParam('mt4_id'),
+        token: getUrlParam('token')
+      }).then(function (data) {
+        // console.log(data);
+        if (data.is_succ) {
+          var amount = "¥"+(Number(data.data.actual_amount)+Number(data.data.actual_poundage))
+          disabled = false;
+          $("#transfer_btn").removeClass('disabled');
+          $(".basic-info-tip[data-name=account_name]").html(data.data.company_name);
+          $(".basic-info-tip[data-name=bank_name]").html(data.data.bank_name);
+          $(".basic-info-tip[data-name=account_id]").html(data.data.transfer_account);
+          $(".basic-info-tip[data-name=account_remark]").html(data.data.transfer_comment);
+          $(".basic-info-tip[data-name=amount]").html(amount);
+        }
+      });
+      $("#transfer_btn").on('click', function () {
+        if (disabled) return;
+        disabled = true;
+        $("#transfer_btn").addClass('disabled');
+        $.post(api.deposit[source]+getUrlParam('token'), {
+          amount: getUrlParam('amount'),
+          platform: getUrlParam('platform'),
+          currency: getUrlParam('currency'),
+          mt4_id: getUrlParam('mt4_id'),
+          bank_card_id: getUrlParam('bank_card_id')
+        }).then(function (data) {
+          // console.log(data);
+          if (data.is_succ) {
+            window.location.href = data.data.url;
+          } else {
+            alert(data.message);
+          }
+        });
+      });
+      $('.basic-info-op').on('click',function () {
+        var input = document.createElement('input');
+        input.setAttribute('readonly', 'readonly');
+        input.setAttribute('value', $(".basic-info-tip[data-name="+$(this).attr('data-name')+"]").html());
+        document.body.appendChild(input);
+        input.setSelectionRange(0, 9999);
+        if (document.execCommand('copy')) {
+          document.execCommand('copy');
+          // console.log($(".basic-info-tip[data-name="+$(this).attr('data-name')+"]").html());
+          alert('复制成功');
+        }
+        document.body.removeChild(input);
+      });
+
+      //获取url中的参数
+      function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+      }
+    });
+  </script>
+</body>
+</html>
