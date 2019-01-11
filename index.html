@@ -69,6 +69,7 @@
     .basic-info-op {
       color: #4A90E2;
       cursor: pointer;
+      position: relative;
     }
     .content-wrapper{
         margin: 35px 0px 15px;
@@ -93,9 +94,10 @@
         font-size: 16px;
     }
     .btn-wrapper {
-      margin-top: 62px;
+      margin-top: 15px;
+      text-align: center;
     }
-    .btn-wrapper .btn {
+    .btn-wrapper .btn.btn-primary {
       width: 100%;
       color: #fff;
       background-color: #4682C8;
@@ -105,50 +107,96 @@
       border-radius: 4px;
       cursor: pointer;
     }
+    .btn-wrapper .btn.btn-cancel {
+      background: transparent;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+    }
     .btn-wrapper .btn.disabled {
       opacity: 0.6;
     }
+    /* .hover-tip {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      height: 30px;
+      border: 1px solid #eee;
+    }
+    .hover-tip:before {
+      content: "";
+      display: block;
+      height: 26px;
+      width: auto;
+      padding: 0 10px;
+      line-height: 25px;
+      color: #fff;
+      background: #4191ef;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+      -webkit-box-shadow: 1px 1px 2px #d4d4d4;
+      -moz-box-shadow: 1px 1px 2px #d4d4d4;
+      box-shadow: 1px 1px 2px #d4d4d4;
+      text-align: center;
+    }
+    .hover-tip::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 26px;
+      left: 50%;
+      width: 0;
+      height: 0;
+      font-size: 0;
+      margin-left: -4px;
+      border-width: 4px;
+      border-color: #4191ef transparent transparent;
+      border-style: solid;
+    } */
   </style>
 </head>
 <body>
   <div class="container">
     <div class="basic-info-wrapper">
       <p class="basic-info">
-        <span class="basic-info-tit">账户名：</span>
+        <span class="basic-info-tit" data-insert="insert" data-lang-type="transfer1">*</span>
         <span class="basic-info-tip" data-name="account_name">xxx</span>
-        <span class="basic-info-op" data-name="account_name">复制</span>
+        <span class="basic-info-op" data-insert="insert" data-name="account_name" data-lang-type="transfer6">*</span>
       </p>
       <p class="basic-info">
-        <span class="basic-info-tit">收款银行：</span>
+        <span class="basic-info-tit" data-insert="insert" data-lang-type="transfer2">*</span>
         <span class="basic-info-tip" data-name="bank_name">xxx</span>
-        <span class="basic-info-op" data-name="bank_name">复制</span>
+        <span class="basic-info-op" data-insert="insert" data-name="bank_name" data-lang-type="transfer6">*</span>
       </p>
       <p class="basic-info">
-        <span class="basic-info-tit">收款账号：</span>
+        <span class="basic-info-tit" data-insert="insert" data-lang-type="transfer3">*</span>
         <span class="basic-info-tip" data-name="account_id">xxx</span>
-        <span class="basic-info-op" data-name="account_id">复制</span>
+        <span class="basic-info-op" data-insert="insert" data-name="account_id" data-lang-type="transfer6">*</span>
       </p>
       <p class="basic-info">
-        <span class="basic-info-tit block">备注（转账时必须填写）：</span>
+        <span class="basic-info-tit block" data-insert="insert" data-lang-type="transfer4">*</span>
         <span class="basic-info-tip" data-name="account_remark">xxx</span>
-        <span class="basic-info-op" data-name="account_remark">复制</span>
+        <span class="basic-info-op" data-insert="insert" data-name="account_remark" data-lang-type="transfer6">*</span>
       </p>
       <p class="basic-info">
-        <span class="basic-info-tit block">转账金额（转账金额保留一个工作日）：</span>
+        <span class="basic-info-tit block" data-insert="insert" data-lang-type="transfer5">*</span>
         <span class="basic-info-tip" data-name="amount">xxx</span>
-        <span class="basic-info-op"></span>
       </p>
     </div>
     <div class="content-wrapper">
         <div class="content-wrapper-line">
-            <span class="content-text">注意事项</span>
+            <span class="content-text" data-insert="insert" data-lang-type="transfer7">*</span>
         </div>
     </div>
-    <p> 1.转账时未填写备注、备注填写错误、转账金额错误等情况，都会导致充值失败；</p>
-    <p> 2.请在当天完成转账；</p>
-    <p> 3.请使用所选择的银行卡进行转账，否则转账失败。</p>
+    <p data-insert="insert" data-lang-type="transfer8">*</p>
+    <p data-insert="insert" data-lang-type="transfer9">*</p>
+    <p data-insert="insert" data-lang-type="transfer10">*</p>
+    <div class="btn-wrapper" style="margin-top: 60px;">
+      <button class="btn btn-primary disabled" data-insert="insert" data-lang-type="transfer11" id="transfer_btn">*</button>
+    </div>
     <div class="btn-wrapper">
-      <button class="btn disabled" id="transfer_btn">已完成转账</button>
+        <button class="btn btn-cancel" data-insert="insert" data-lang-type="transfer12" id="transfer_cancel_btn">*</button>
     </div>
   </div>
 
@@ -159,6 +207,83 @@
   crossorigin="anonymous"></script>
   <script>
     $(document).ready(function () {
+      var langData = {
+        cn: {
+          transfer1: "账户名：",
+          transfer2: "收款银行：",
+          transfer3: "收款账号：",
+          transfer4: "备注（转账时必须填写）：",
+          transfer5: "转账金额（转账金额保留一个工作日）：",
+          transfer6: "复制",
+          transfer7: "注意事项",
+          transfer8: "1.转账时未填写备注、备注填写错误、转账金额错误等情况，都会导致充值失败；",
+          transfer9: "2.请在当天完成转账；",
+          transfer10: "3.请使用所选择的银行卡进行转账，否则转账失败。",
+          transfer11: "已完成转账",
+          transfer12: "取消",
+          transfer13: "复制成功"
+        },
+        en: {
+          transfer1: "Account name：",
+          transfer2: "Receiving bank：",
+          transfer3: "Receivable account：",
+          transfer4: "Remarks（Must be completed when transfer）：",
+          transfer5: "Transfer amount（The transfer amount will be reserved for one working day）：",
+          transfer6: "Copy",
+          transfer7: "Matters need attention",
+          transfer8: "1.No remarks, errors remarks and errors transfer amount which will lead to the failure of recharge.",
+          transfer9: "2.Please complete the transfer on the same day.",
+          transfer10: "3.Please use the selected bank card for transfer, otherwise the transfer will fail.",
+          transfer11: "Transfer completed",
+          transfer12: "Cancle",
+          transfer13: "Successfully copied"
+        },
+        vi: {
+          transfer1: "Tên tài khoản：",
+          transfer2: "Ngân hàng nhận：",
+          transfer3: "Tài khoản hưởng：",
+          transfer4: "Ghi chú（Phải hoàn thành khi chuyển khoản）：",
+          transfer5: "Tài khoản chuyển khoản（Số tiền chuyển sẽ được dành cho một ngày làm việc）：",
+          transfer6: "Sao chép",
+          transfer7: "Các điểm cần lưu ý",
+          transfer8: "1.Không ghi chú, lỗi ghi chú và số tiền chuyển lỗi sẽ dẫn đến không thể nộp tiền.",
+          transfer9: "2.Vui lòng hoàn tất chuyển khoản trong cùng một ngày.",
+          transfer10: "3.Vui lòng sử dụng thẻ ngân hàng đã chọn để chuyển khoản, nếu không bạn sẽ không thể chuyển khoản.",
+          transfer11: "Chuyển khoản xong",
+          transfer12: "Hủy bỏ",
+          transfer13: "Đã sao chép thành công"
+        },
+        "zh-Hant": {
+          transfer1: "賬戶名：",
+          transfer2: "收款銀行：",
+          transfer3: "收款賬號：",
+          transfer4: "備註（轉賬時必須填寫）：",
+          transfer5: "轉賬金額（轉賬金額保留一個工作日）：",
+          transfer6: "複製",
+          transfer7: "注意事項",
+          transfer8: "1.轉賬時未填寫備註、備註填寫錯誤、轉賬金額錯誤等情況，都會導致充值失敗；",
+          transfer9: "2.請在當天完成轉賬；",
+          transfer10: "3.請使用所選擇的銀行卡進行轉賬，否則轉賬失敗。",
+          transfer11: "已完成轉賬",
+          transfer12: "取消",
+          transfer13: "複製成功"
+        },
+        id: {
+          transfer1: "Nama Pemilik Rekening：",
+          transfer2: "Bank Penerima：",
+          transfer3: "Jumlah yang diterima：",
+          transfer4: "Komentar（Harus diisi ketika melakukan pengisian dana）：",
+          transfer5: "Jumlah Transfer（Jumlah transfer akan dicadangkan untuk 1 hari kerja）：",
+          transfer6: "Salin",
+          transfer7: "Hal-Hal yang harus diperhatikan",
+          transfer8: "1.Tidak boleh mengandung komentar, kesalahan komentar dan kesalahan jumlah pengiriman akan mengakibatkan kegagalan pengisian dana",
+          transfer9: "2.Mohon selesaikan pengiriman dana dalam hari yang sama",
+          transfer10: "3.Mohon gunakan Rekening bank yang dipilih untuk pengiriman dana, jika tidak maka pengiriman dana akan gagal.",
+          transfer11: "Pengiriman berhasil",
+          transfer12: "Batal",
+          transfer13: "Berhasil mengikuti"
+        }
+      };
       var disabled = true;
       var api = {
         transferInfo: {
@@ -170,11 +295,24 @@
           web: '/api/v3/payment/deposit?token='
         }
       };
+      var lang = 'cn';
+      var langArr = ['cn', 'en', 'vi', 'zh-Hant', 'id'];
       var source = getUrlParam('source') === 'app' ? 'app' : 'web';
+      $.each(langArr, function (index, value) {
+        if (value == getUrlParam("lang")) {
+          lang = value;
+        }
+      });
+      //insert html
+      $("body *[data-insert=insert]").each(function () {
+        $(this).html(langData[lang][$(this).attr("data-lang-type")]);
+      });
+
       $.get(api.transferInfo[source], {
         amount: getUrlParam('amount'),
         platform: getUrlParam('platform'),
         mt4_id: getUrlParam('mt4_id'),
+        lang: lang,
         token: getUrlParam('token')
       }).then(function (data) {
         // console.log(data);
@@ -198,17 +336,40 @@
           platform: getUrlParam('platform'),
           currency: getUrlParam('currency'),
           mt4_id: getUrlParam('mt4_id'),
-          bank_card_id: getUrlParam('bank_card_id')
+          bank_card_id: getUrlParam('bank_card_id'),
+          lang: lang
         }).then(function (data) {
           // console.log(data);
           if (data.is_succ) {
+            if (source === 'app') {
+              callNative({
+                type: 'openReturnButton'
+              });
+            }
             window.location.href = data.data.url;
           } else {
             alert(data.message);
           }
         });
       });
+      $("#transfer_cancel_btn").on('click', function () {
+        if (source === 'app') {
+          callNative({
+            type: 'back_prev_page'
+          });
+        } else {
+          var userAgent = navigator.userAgent;
+          if (userAgent.indexOf("Firefox") != -1 || userAgent.indexOf("Chrome") !=-1) {
+            window.location.href="about:blank";
+          } else {
+            window.opener = null;
+            window.open("", "_self");
+            window.close();
+          }
+        }
+      });
       $('.basic-info-op').on('click',function () {
+        var self = this;
         var input = document.createElement('input');
         input.setAttribute('readonly', 'readonly');
         input.setAttribute('value', $(".basic-info-tip[data-name="+$(this).attr('data-name')+"]").html());
@@ -217,7 +378,11 @@
         if (document.execCommand('copy')) {
           document.execCommand('copy');
           // console.log($(".basic-info-tip[data-name="+$(this).attr('data-name')+"]").html());
-          alert('复制成功');
+          alert(langData[lang]["transfer13"]);
+          // $(this).append('<i class="hover-tip">复制成功</i>');
+          // setTimeout(function () {
+          //   // $(self).find("i").remove();
+          // }, 2000);
         }
         document.body.removeChild(input);
       });
@@ -227,6 +392,21 @@
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
         var r = window.location.search.substr(1).match(reg);  //匹配目标参数
         if (r != null) return unescape(r[2]); return null; //返回参数值
+      }
+      //native和h5通讯
+      function callNative(oAction) {
+          var sAction = JSON.stringify(oAction);
+          //IOS和Android均会在页面写入该对象。只是调用方法略不同
+          try {
+            if (isIOS()) {
+              TigerwitNative(sAction);
+            } else {
+              TigerwitNative.jsCall(sAction);
+            }
+          } catch (e) {}
+      }
+      function isIOS() {
+        return /like Mac OS X/.test(navigator.userAgent);
       }
     });
   </script>
