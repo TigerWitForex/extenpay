@@ -345,13 +345,8 @@
               callNative({
                 type: 'openReturnButton'
               });
-              callNative({
-                type: 'openUrlOnce',
-                url: data.data.url
-              });
-            } else {
-              window.location.href = data.data.url;
             }
+            window.location.href = data.data.url;
           } else {
             alert(data.message);
           }
